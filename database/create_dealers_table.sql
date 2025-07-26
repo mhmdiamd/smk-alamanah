@@ -1,0 +1,6 @@
+CREATE TABLE dealers (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    location VARCHAR(255) NOT NULL,
+    contact VARCHAR(50)
+);
