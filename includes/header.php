@@ -1,3 +1,30 @@
+<?php
+define('BASE_URL', '/wimcycle_project');
+$menus = [
+    'home' => [
+        'name' => 'Home',
+        'url' => BASE_URL . '/views/home.php',
+        'icon' => 'bi-house'
+    ],
+    'bicycles' => [
+        'name' => 'Bicycles',
+        'url' => BASE_URL . '/views/bicycle.php',
+        'icon' => 'bi-bicycle'
+    ],
+    'categories' => [
+        'name' => 'Categories',
+        'url' => BASE_URL . '/views/category.php',
+        'icon' => 'bi-tags'
+    ],
+    'dealers' => [
+        'name' => 'Dealers',
+        'url' => BASE_URL . '/views/dealer.php',
+        'icon' => 'bi-shop'
+    ]
+];
+
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -8,7 +35,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.datatables.net/2.3.2/css/dataTables.dataTables.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-  
+
 </head>
 
 <body>
@@ -20,12 +47,14 @@
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Beranda</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Kategori</a>
-                    </li>
+                    <?php foreach ($menus as $menu): ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?php echo htmlspecialchars($menu['url']); ?>">
+                                <!-- <i class="<?php echo htmlspecialchars($menu['icon']); ?>"></i> -->
+                                <?php echo htmlspecialchars($menu['name']); ?>
+                            </a>
+                        </li>
+                    <?php endforeach; ?>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Login</a>
                     </li>
