@@ -6,7 +6,7 @@ include_once __DIR__ . '/../controllers/category_controller.php';
 $categoryController = new CategoryController($mysqli);
 $categories = $categoryController->getCategories();
 
-switch ($_POST['action']) {
+switch (strtoupper($_POST['action'])) {
     case 'CREATE':
         $name = $_POST['name'];
         $description = $_POST['description'];

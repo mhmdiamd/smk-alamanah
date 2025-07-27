@@ -8,13 +8,13 @@ INSERT INTO dealers (name, location, contact) VALUES
 ('SpeedyWheels', '456 Road St, City B', '555-0102');
 
 INSERT INTO bicycles (category_id, dealer_id, brand, model, price, image, description) VALUES
-(1, 1, 'Trek', 'Marlin 5', 599.99, 'trek_marlin5.jpg', 'Versatile mountain bike.'),
-(2, 1, 'Giant', 'Defy Advanced 2', 2499.99, 'giant_defy.jpg', 'Lightweight road bike.'),
-(1, 2, 'Specialized', 'Rockhopper', 749.99, 'specialized_rockhopper.jpg', 'Durable for rugged terrains.'),
-(3, 2, 'Cannondale', 'Quick 4', 899.99, 'cannondale_quick4.jpg', 'Ideal for city and trails.');
+(1, 1, 'Trek', 'Marlin 5', 599.99, 'trek_marlin5.png', 'Versatile mountain bike.'),
+(2, 1, 'Giant', 'Defy Advanced 2', 2499.99, 'giant_defy.png', 'Lightweight road bike.'),
+(1, 2, 'Specialized', 'Rockhopper', 749.99, 'specialized_rockhopper.png', 'Durable for rugged terrains.'),
+(3, 2, 'Cannondale', 'Quick 4', 899.99, 'cannondale_quick4.png', 'Ideal for city and trails.');
 
 INSERT INTO inventories (bicycle_id, dealer_id, stock) VALUES
-(1, 1, 10),
-(2, 1, 5),
-(3, 2, 8),
-(4, 2, 12);
+(9, 4, 10),
+(10, 4, 5),
+(11, 5, 8),
+(12, 5, 12);

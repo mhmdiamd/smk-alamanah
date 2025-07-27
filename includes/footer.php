@@ -1,9 +1,6 @@
-<div class="p-5 text-center bg-body-tertiary border-none">
-    <div class="card-body">
-        <h5 class="card-title">Special title treatment</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
-    </div>
+<div class="bg-body-tertiary container justify-content-between d-flex text-center py-3">
+    <p class="mb-0 text-muted">&copy; <?php echo date('Y'); ?> WimCycle. All rights reserved.</p>
+    <p class="mb-0 text-muted small">Contact us: <a href="mailto:support@wimcycle.com" class="text-decoration-none text-dark">support@wimcycle.com</a></p>
 </div>
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <script src="https://cdn.datatables.net/2.3.2/js/dataTables.js"></script>

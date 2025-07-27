@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     $image = $_POST['image'] ?? '';
     $description = $_POST['description'] ?? '';
 
-    switch ($action) {
+    switch (strtoupper($action)) {
         case 'CREATE':
             $result = $bicycleController->createBicycle($category_id, $dealer_id, $brand, $model, $price, $image, $description);
             $_SESSION['flash_message'] = [

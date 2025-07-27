@@ -1,174 +1,57 @@
 <?php
-session_start();
 include_once __DIR__ . '/../includes/config.php';
 include_once __DIR__ . '/../includes/header.php';
-include_once __DIR__ . '/../controllers/dealer_controller.php';
+require_once __DIR__ . '/../controllers/category_controller.php';
+require_once __DIR__ . '/../controllers/dealer_controller.php';
+require_once __DIR__ . '/../controllers/bicycle_controller.php';
+
+$categoryController = new CategoryController($mysqli);
+$categories = $categoryController->getCategories();
 
 $dealerController = new DealerController($mysqli);
-$categories = $dealerController->getDealers();
+$dealers = $dealerController->getDealers();
 
+$bicycleController = new BicycleController($mysqli);
+$bicycles = $bicycleController->getBicycles();
 ?>
 
-<div class="container min-vh-100 pb-5">
-    <div class="w-100 d-flex justify-content-between align-items-center mt-5 mb-3">
-        <h2 class="mt-2 mb-2">Data Dealer</h2>
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            Tambah Dealer
-        </button>
+<!-- Hero Section -->
+<div class="bg-primary bg-gradient text-white py-5">
+    <div class="container text-center">
+        <h1 class="display-4 fw-bold">Trusted Dealers</h1>
+        <p class="lead mb-4">Discover the best bicycles from top dealers.</p>
+        <a href="<?php echo BASE_URL; ?>views/bicycles.php" class="btn btn-light btn-lg">Explore Now</a>
     </div>
-    <table id="myTable" class="display">
-        <thead>
-            <tr>
-                <th>No</th>
-                <th>Name</th>
-                <th>Contact</th>
-                <th>Location</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php if ($categories->num_rows > 0): ?>
-                <?php foreach ($categories as $index => $dealer): ?>
-                    <tr>
-                        <td><?php echo htmlspecialchars($index + 1); ?></td>
-                        <td>
-                            <?php echo htmlspecialchars($dealer['name']); ?>
-                        </td>
-                        <td><?php echo htmlspecialchars($dealer['contact']); ?></td>
-                        <td><?php echo htmlspecialchars($dealer['location']); ?></td>
-                        <td class="d-flex gap-2">
-                            <button type="button" class="btn p-0 text-primary" data-bs-toggle="modal" data-bs-target="#exampleDeleteModal<?php echo htmlspecialchars($index + 1); ?>">
-                                <i class="bi bi-trash-fill text-danger"></i>
-                            </button>
+</div>
 
-                            <!-- Delete Confirmation -->
-                            <div class="modal fade" id="exampleDeleteModal<?php echo htmlspecialchars($index + 1); ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">Data <?php echo htmlspecialchars($dealer['name']); ?></h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <p>Are you sure you want to delete this dealer?</p>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                            <form method="POST" action="../handlers/dealers_handler.php">
-                                                <input type="hidden" name="id" value="<?php echo htmlspecialchars($dealer['id']); ?>">
-                                                <input type="hidden" name="action" value="DELETE">
-                                                <button type="submit" class="btn btn-primary">Delete</button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
+<!-- Dealers Section -->
+<div class="bg-light py-5">
+    <div class="container">
+        <div class="row row-cols-1 row-cols-md-4 g-4 justify-content-center">
+            <?php if ($dealers->num_rows > 0): ?>
+                <?php while ($dealer = $dealers->fetch_assoc()): ?>
+                    <div class="col">
+                        <div class="card border-0 shadow-sm h-100">
+                            <div class="card-body text-center p-3">
+                                <h5 class="card-title fw-bold"><?php echo htmlspecialchars($dealer['name']); ?></h5>
+                                <p class="card-text text-muted small"><?php echo htmlspecialchars($dealer['location']); ?></p>
+                                <a href="<?php echo BASE_URL; ?>views/dealer.php?id=<?php echo htmlspecialchars($dealer['id']); ?>" class="btn btn-outline-success btn-sm">Visit</a>
                             </div>
-
-                            <button type="button" class="btn p-0 text-primary" data-bs-toggle="modal" data-bs-target="#exampleModal<?php echo htmlspecialchars($index + 1); ?>">
-                                <i class="bi bi-pencil-square"></i>
-                            </button>
-
-                            <!-- Edit Dealer Modal -->
-                            <div class="modal fade" id="exampleModal<?php echo htmlspecialchars($index + 1); ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <form method="POST" action="../handlers/dealers_handler.php">
-                                            <input value="<?php echo htmlspecialchars($dealer['id']); ?>" type="hidden" name="id" class="form-control">
-                                            <input value="UPDATE" type="hidden" name="action" class="form-control">
-
-                                            <div class="modal-body">
-                                                <div class="mb-3">
-                                                    <label for="exampleInputEmail1" class="form-label">Name</label>
-                                                    <input value="<?php echo htmlspecialchars($dealer['name']); ?>" type="text" name="name" class="form-control">
-                                                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="exampleInputEmail1" class="form-label">Contact</label>
-                                                    <input value="<?php echo htmlspecialchars($dealer['contact']); ?>" type="text" name="contact" class="form-control">
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="exampleInputPassword1" class="form-label">Description</label>
-                                                    <input value="<?php echo htmlspecialchars($dealer['location']); ?>" name="location" type="text" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                <button type="submit" class="btn btn-primary">Update changes</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
+                        </div>
+                    </div>
+                <?php endwhile; ?>
+            <?php else: ?>
+                <p class="text-center text-muted">No dealers available.</p>
             <?php endif; ?>
-        </tbody>
-    </table>
-</div>
-
-<!-- Modal Create -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form method="POST" action="../handlers/dealers_handler.php">
-                <input type="hidden" value="CREATE" name="action" class="form-control">
-                <div class="modal-body">
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Name</label>
-                        <input type="text" name="name" class="form-control">
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Contact</label>
-                        <input type="text" name="contact" class="form-control">
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Location</label>
-                        <textarea name="location" class="form-control"></textarea>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
-                </div>
-            </form>
         </div>
     </div>
 </div>
 
-<!-- Success create toast -->
-<?php if (isset($_SESSION['flash_message'])): ?>
-    <div class="toast-container position-fixed top-0 end-0 p-3">
-        <div id="statusToast" class="toast align-items-center text-white <?php echo $_SESSION['flash_message']['type'] === 'success' ? 'bg-success' : 'bg-danger'; ?> border-0" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="d-flex">
-                <div class="toast-body">
-                    <?php echo htmlspecialchars($_SESSION['flash_message']['message']); ?>
-                </div>
-                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div>
-        </div>
-    </div>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var toastEl = document.getElementById('statusToast');
-            var toast = new bootstrap.Toast(toastEl, {
-                delay: 3000
-            });
-            toast.show();
-        });
-    </script>
-    <?php
-    unset($_SESSION['flash_message']);
-    ?>
-<?php endif; ?>
+<!-- Call to Action -->
+<div class="bg-dark text-white py-4 text-center">
+    <h3 class="fw-light">Start Your Journey Today</h3>
+    <a href="<?php echo BASE_URL; ?>views/bicycles.php" class="btn btn-outline-light btn-sm">Shop Now</a>
+</div>
 
 <?php
 include_once __DIR__ . '/../includes/footer.php';

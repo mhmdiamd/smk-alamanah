@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     $location = $_POST['location'] ?? '';
     $contact = $_POST['contact'] ?? '';
 
-    switch ($action) {
+    switch (strtoupper($action)) {
         case 'CREATE':
             $result = $dealerController->createDealer($name, $location, $contact);
             $_SESSION['flash_message'] = [

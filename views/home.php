@@ -35,7 +35,7 @@ $bicycles = $bicycleController->getBicycles();
                         <div class="card-body text-center p-3">
                             <h5 class="card-title fw-bold"><?php echo htmlspecialchars($category['name']); ?></h5>
                             <p class="card-text text-muted small"><?php echo htmlspecialchars(substr($category['description'], 0, 80)) . (strlen($category['description']) > 80 ? '...' : ''); ?></p>
-                            <a href="<?php echo BASE_URL; ?>views/category.php?id=<?php echo htmlspecialchars($category['id']); ?>" class="btn btn-outline-primary btn-sm">View</a>
+                            <a href="<?php echo BASE_URL; ?>/views/bicycle.php?category_id=<?php echo htmlspecialchars($category['id']); ?>" class="btn btn-outline-primary btn-sm">View</a>
                         </div>
                     </div>
                 </div>
@@ -58,7 +58,6 @@ $bicycles = $bicycleController->getBicycles();
                             <div class="card-body text-center p-3">
                                 <h5 class="card-title fw-bold"><?php echo htmlspecialchars($dealer['name']); ?></h5>
                                 <p class="card-text text-muted small"><?php echo htmlspecialchars($dealer['location']); ?></p>
-                                <a href="<?php echo BASE_URL; ?>views/dealer.php?id=<?php echo htmlspecialchars($dealer['id']); ?>" class="btn btn-outline-success btn-sm">Visit</a>
                             </div>
                         </div>
                     </div>
@@ -79,7 +78,8 @@ $bicycles = $bicycleController->getBicycles();
                 <div class="col">
                     <div class="card border-0 shadow-sm h-100">
                         <?php if (!empty($bicycle['image'])): ?>  
-                            <img src="<?php echo htmlspecialchars($bicycle['image']); ?>" class="card-img-top" alt="<?php echo htmlspecialchars($bicycle['brand'] . ' ' . $bicycle['model']); ?>" style="max-height: 200px; object-fit: cover;">
+                            <img src="
+                                <?php echo BASE_URL ?>/assets/images/<?php echo htmlspecialchars($bicycle['image']); ?>" class="card-img-top" alt="<?php echo htmlspecialchars($bicycle['brand'] . ' ' . $bicycle['model']); ?>" style="max-height: 200px; object-fit: cover;">
                         <?php endif; ?>
                         <div class="card-body text-center p-3">
                             <h5 class="card-title fw-bold"><?php echo htmlspecialchars($bicycle['brand'] . ' ' . $bicycle['model']); ?></h5>
