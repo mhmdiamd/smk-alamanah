@@ -33,7 +33,7 @@ $categories = $categoryController->getCategories();
                     <tr>
                         <td><?php echo htmlspecialchars($index + 1); ?></td>
                         <td>
-                            <a href="../views/bicycle.php?category_id=<?php echo htmlspecialchars($category['id']); ?>">
+                            <a href="../../views/bicycle.php?category_id=<?php echo htmlspecialchars($category['id']); ?>">
                                 <?php echo htmlspecialchars($category['name']); ?>
                             </a>
                         </td>
