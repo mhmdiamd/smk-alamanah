@@ -1,3 +1,7 @@
+<?php
+require_once "../Storage/data_kategori.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -45,26 +49,37 @@
             <thead>
                 <tr>
                     <th>Id</th>
-                    <th>Foto</th>
                     <th>Nama</th>
                     <th>Deskripsi</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>-</td>
-                    <td>Sepeda Balap</td>
-                    <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque, ut!</td>
-                    <td>-</td>
-                </tr>
+                <?php foreach ($data_kategori as $kategori): ?>
+                    <tr>
+                        <td>
+                            <?php echo $kategori['id'] ?>
+                        </td>
+                        <td>
+                            <?php echo $kategori['nama'] ?>
+                        </td>
+                        <td>
+                            <?php echo $kategori['deskripsi'] ?>
+                        </td>
+                        <td>
+                            <div class="d-flex gap-3">
+                                
+                            </div>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
             </tbody>
         </table>
     </div>
 
     <script src="../jquery-3.7.1.js"></script>
     <script src="../dataTables.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
 
     <script>
         new DataTable("#tableSepeda");
