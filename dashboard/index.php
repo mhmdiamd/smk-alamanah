@@ -1,6 +1,7 @@
 <?php
 
 require_once "../Storage/data_sepeda.php";
+require_once "../config/base_config.php";
 
 ?>
 

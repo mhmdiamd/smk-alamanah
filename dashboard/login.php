@@ -1,6 +1,7 @@
 <?php
 
 require_once "../Storage/data_sepeda.php";
+require_once "../config/base_config.php";
 
 ?>
 
@@ -26,7 +27,7 @@ require_once "../Storage/data_sepeda.php";
                     <div class="card-body">
                         <h2 class="card-title text-center">Login</h2>
                         <p class="card-subtitle text-body-secondary mb-3 text-center">Login sekarang untuk menikmati fitur lainnya!</p>
-                        <form method="POST" action="../controller/handle-login.php">
+                        <form method="POST" action="<?php echo $config->BASE_URL; ?>/controller/handle-login">
                             <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label">Email address</label>
                                 <input name="email" type="email" placeholder="contoh@gmail.com" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
