@@ -1,7 +1,6 @@
 <?php
 
 namespace config;
-
 class BaseConfig {
     public $BASE_URL;
 

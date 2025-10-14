@@ -3,6 +3,11 @@
 require_once "../Storage/data_sepeda.php";
 require_once "../config/base_config.php";
 
+$pesan_error = "";
+if(isset($_GET['error'])) {
+    $pesan_error = $_GET['error'];
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -11,7 +16,7 @@ require_once "../config/base_config.php";
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous"> -->
     <link rel="stylesheet" href="../dataTables.dataTables.css">
 
     <title>Document</title>
@@ -26,6 +31,13 @@ require_once "../config/base_config.php";
                 <div class="card" style="max-width: 32rem; max-height: fit-content;">
                     <div class="card-body">
                         <h2 class="card-title text-center">Login</h2>
+                        
+                        <?php if($pesan_error): ?>
+                            <p style="color: red;">
+                                <?php echo $pesan_error ?>
+                            </p>
+                        <?php endif;?>
+                        
                         <p class="card-subtitle text-body-secondary mb-3 text-center">Login sekarang untuk menikmati fitur lainnya!</p>
                         <form method="POST" action="<?php echo $config->BASE_URL; ?>/controller/handle-login">
                             <div class="mb-3">
