@@ -1,5 +1,8 @@
 <?php
 require_once "../database/list_data_sepeda.php";
+require_once "../config/base_config.php";
+
+echo $config->BASE_URL;
 ?>
 
 <!DOCTYPE html>
