@@ -4,8 +4,14 @@ require_once "../Storage/data_sepeda.php";
 require_once "../config/base_config.php";
 
 $pesan_error = "";
+$error_type = "";
+
 if(isset($_GET['error'])) {
     $pesan_error = $_GET['error'];
+}
+
+if(isset($_GET['type'])) {
+    $error_type = $_GET['type'];
 }
 
 ?>
@@ -42,12 +48,18 @@ if(isset($_GET['error'])) {
                         <form method="POST" action="<?php echo $config->BASE_URL; ?>/controller/handle-login">
                             <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label">Email address</label>
-                                <input name="email" type="email" placeholder="contoh@gmail.com" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                <input style="
+                                    <?php if($error_type == "email") {
+                                        echo "border-color: red";
+                                    } ?>
+                                " name="email" type="email" placeholder="contoh@gmail.com" 
+                                class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                                 <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
                             </div>
                             <div class="mb-3">
                                 <label for="exampleInputPassword1" class="form-label">Password</label>
-                                <input name="password" type="password" placeholder="********" class="form-control" id="exampleInputPassword1">
+                                <input name="password" type="password" placeholder="********" 
+                                class="form-control" id="exampleInputPassword1">
                             </div>
                             <button type="submit" class="btn btn-primary w-100">Login</button>
 

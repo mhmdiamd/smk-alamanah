@@ -3,6 +3,11 @@
 require_once "../Storage/data_sepeda.php";
 require_once "../config/base_config.php";
 
+$success = "";
+if (isset($_GET['success'])) {
+    $success = $_GET['success'];
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -21,6 +26,16 @@ require_once "../config/base_config.php";
     <?php include "../includes/header.php" ?>
 
     <div class="container">
+
+        <div class="row mt-5">
+            <div class="col-12">
+                <?php if ($success): ?>
+                    <div class="alert alert-success">
+                        <?php echo $success ?>
+                    </div>
+                <?php endif; ?>
+            </div>
+        </div>
 
         <div class="row mt-5 mb-5">
             <div class="col-lg-3">

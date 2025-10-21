@@ -1,3 +1,11 @@
+<?php
+    session_start();
+    $user = "";
+    if(isset($_SESSION['name'])) {
+        $user = $_SESSION['name'];
+    }
+?>
+
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container">
         <a class="navbar-brand" href="index.php">Navbar</a>
@@ -28,7 +36,11 @@
                     </ul>
                 </li>
                  <li class="nav-item">
-                    <a class="btn btn-primary" href="">Login</a>
+                    <?php if(isset($_SESSION['name'])): ?>
+                        <a class="btn btn-danger" href="">Logout</a>
+                    <?php else: ?>
+                        <a class="btn btn-primary" href="">Login</a>
+                    <?php endif; ?>
                 </li>
             </ul>
         </div>
