@@ -1,4 +1,5 @@
 <?php
+    require_once "../config/base_config.php";
     session_start();
     $user = "";
     if(isset($_SESSION['name'])) {
@@ -37,9 +38,9 @@
                 </li>
                  <li class="nav-item">
                     <?php if(isset($_SESSION['name'])): ?>
-                        <a class="btn btn-danger" href="">Logout</a>
+                        <a class="btn btn-danger" href="<?php echo $config->BASE_URL ?>/controller/handle-logout">Logout</a>
                     <?php else: ?>
-                        <a class="btn btn-primary" href="">Login</a>
+                        <a class="btn btn-primary" href="<?php echo $config->BASE_URL ?>/dashboard/login">Login</a>
                     <?php endif; ?>
                 </li>
             </ul>

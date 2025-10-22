@@ -8,6 +8,13 @@ if (isset($_GET['success'])) {
     $success = $_GET['success'];
 }
 
+$error = "";
+if (isset($_GET['error'])) {
+    $error = $_GET['error'];
+}
+
+$new_data_sepeda = $data_sepeda;
+
 ?>
 
 <!DOCTYPE html>
@@ -30,13 +37,25 @@ if (isset($_GET['success'])) {
         <div class="row mt-5">
             <div class="col-12">
                 <?php if ($success): ?>
-                    <div class="alert alert-success">
-                        <?php echo $success ?>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>Login Berhasil!, </strong> Selamat datang kembali <?php echo $_SESSION['name'] ?>.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 <?php endif; ?>
             </div>
         </div>
 
+         <div class="row mt-5">
+            <div class="col-12">
+                <?php if ($error): ?>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>Edit Gagal!, </strong> <?php echo $error ?>.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                <?php endif; ?>
+            </div>
+        </div>
+        
         <div class="row mt-5 mb-5">
             <div class="col-lg-3">
                 <div class="card bg-success text-light">
@@ -136,7 +155,7 @@ if (isset($_GET['success'])) {
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($data_sepeda as $sepeda): ?>
+                <?php foreach ($new_data_sepeda as $sepeda): ?>
                     <tr>
                         <td>
                             <?php echo $sepeda['id']; ?>
@@ -176,7 +195,7 @@ if (isset($_GET['success'])) {
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary">Save changes</button>
+                                                <a href="<?php echo $config->BASE_URL ?>/controller/sepeda-controller/handle-delete-sepeda?id=<?php echo $sepeda['id'] ?>" class="btn btn-primary">Hapus Sekarang</a>
                                             </div>
                                         </div>
                                     </div>
