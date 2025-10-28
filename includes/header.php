@@ -1,5 +1,5 @@
 <?php
-    require_once "../config/base_config.php";
+    require_once __DIR__ . "/../config/base_config.php";
     session_start();
     $user = "";
     if(isset($_SESSION['name'])) {
@@ -36,7 +36,7 @@
                         <li><a class="dropdown-item" href="kategori.php">Lihat Semua</a></li>
                     </ul>
                 </li>
-                 <li class="nav-item">
+                <li class="nav-item">
                     <?php if(isset($_SESSION['name'])): ?>
                         <a class="btn btn-danger" href="<?php echo $config->BASE_URL ?>/controller/handle-logout">Logout</a>
                     <?php else: ?>
